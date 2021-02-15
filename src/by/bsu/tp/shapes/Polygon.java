@@ -1,21 +1,26 @@
 package by.bsu.tp.shapes;
 
 import java.awt.*;
+import java.util.ArrayList;
 
-public class Polygon extends Shape2D {
-    private int numberOfPoints;
+public class Polygon extends Shape2D{
+    private ArrayList<Point> points;
 
-    public Polygon(Color borderColor, Point theCenter, Color fillColor) {
+    public Polygon(Color borderColor, Point theCenter, Color fillColor, ArrayList<Point> points) {
         super(borderColor, theCenter, fillColor);
+        this.points = points;
+    }
+
+    public ArrayList<Point> getPoints() {
+        return points;
+    }
+
+    public void setPoints(ArrayList<Point> points) {
+        this.points = points;
     }
 
     @Override
     public void draw() {
 
-    }
-
-    @Override
-    public Point location() {
-        return null;
     }
 }
