@@ -9,7 +9,7 @@ public class Rectangle extends RectangleShape {
     }
 
     @Override
-    public void draw() {
+    public void draw(Graphics2D g2d) {
 
     }
 }
