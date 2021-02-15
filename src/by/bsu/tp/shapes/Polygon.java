@@ -20,7 +20,7 @@ public class Polygon extends Shape2D{
     }
 
     @Override
-    public void draw() {
+    public void draw(Graphics2D g2d) {
 
     }
 }

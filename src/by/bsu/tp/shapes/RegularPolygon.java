@@ -19,7 +19,7 @@ public class RegularPolygon extends Shape2D {
     private int numberOfPoints;
 
     @Override
-    public void draw() {
+    public void draw(Graphics2D g2d) {
 
     }
 

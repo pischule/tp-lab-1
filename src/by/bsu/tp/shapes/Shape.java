@@ -6,9 +6,14 @@ public abstract class Shape {
     private Color borderColor;
     private Point theCenter;
 
+
     public Shape(Color borderColor, Point theCenter) {
         this.borderColor = borderColor;
         this.theCenter = theCenter;
+    }
+
+    public boolean containsPoint(Point p) {
+        return false;
     }
 
     public Color getBorderColor() {
@@ -19,7 +24,7 @@ public abstract class Shape {
         this.borderColor = borderColor;
     }
 
-    public abstract void draw();
+    public abstract void draw(Graphics2D g2d);
 
     public void move(Point newCenter) {
         this.theCenter = newCenter;
