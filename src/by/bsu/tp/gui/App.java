@@ -23,9 +23,7 @@ public class App extends JFrame {
     private final RegularPolygonDialog sideNumDialog;
     private final ArrayList<Shape> shapes = new ArrayList<>();
     private boolean isDragged = false;
-    private final boolean isFrameColorChanging = true;
     private Tool currentTool = Tool.MOVE;
-    private final int frameWidth = 1;
 
     private final Color frameColor;
     private final Color fillColor;
