@@ -12,6 +12,8 @@ public abstract class Shape {
         this.theCenter = theCenter;
     }
 
+    public abstract void setAnotherPoint(Point point);
+
     public boolean containsPoint(Point p) {
         return false;
     }

@@ -11,6 +11,11 @@ public class Polygon extends Shape2D{
         this.points = points;
     }
 
+    @Override
+    public void setAnotherPoint(Point point) {
+        points.add(point);
+    }
+
     public ArrayList<Point> getPoints() {
         return points;
     }

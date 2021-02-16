@@ -14,6 +14,11 @@ public abstract class Shape1D extends Shape2D{
         return p;
     }
 
+    @Override
+    public void setAnotherPoint(Point point) {
+        p = point;
+    }
+
     public void setP(Point p) {
         this.p = p;
     }
