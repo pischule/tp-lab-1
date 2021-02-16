@@ -1,5 +1,7 @@
 package by.bsu.tp.shapes;
 
+import by.bsu.tp.Util;
+
 import java.awt.*;
 
 public class Circle extends Shape2D {
@@ -16,6 +18,11 @@ public class Circle extends Shape2D {
     public Circle(Color borderColor, Point theCenter, Color fillColor, int radius) {
         super(borderColor, theCenter, fillColor);
         this.radius = radius;
+    }
+
+    @Override
+    public void setAnotherPoint(Point point) {
+        radius =  Util.perpendicularDistance(getTheCenter(), point);
     }
 
     @Override

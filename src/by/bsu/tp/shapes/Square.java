@@ -1,5 +1,7 @@
 package by.bsu.tp.shapes;
 
+import by.bsu.tp.Util;
+
 import java.awt.*;
 
 public class Square extends Shape2D{
@@ -15,6 +17,11 @@ public class Square extends Shape2D{
 
     public Square(Color borderColor, Point theCenter, Color fillColor) {
         super(borderColor, theCenter, fillColor);
+    }
+
+    @Override
+    public void setAnotherPoint(Point point) {
+        side = 2 * Util.perpendicularDistance(getTheCenter(), point);
     }
 
     @Override
