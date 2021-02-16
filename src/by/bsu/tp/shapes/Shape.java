@@ -9,7 +9,7 @@ public abstract class Shape {
 
     public Shape(Color borderColor, Point theCenter) {
         this.borderColor = borderColor;
-        this.theCenter = theCenter;
+        this.theCenter = new Point(theCenter);
     }
 
     public abstract void setAnotherPoint(Point point);
@@ -43,4 +43,6 @@ public abstract class Shape {
     public void setTheCenter(Point theCenter) {
         this.theCenter = theCenter;
     }
+
+
 }

@@ -20,6 +20,11 @@ public class Circle extends Shape2D {
         this.radius = radius;
     }
 
+    public Circle(Color borderColor, Point theCenter, Color fillColor, Point anotherPoint) {
+        super(borderColor, theCenter, fillColor);
+        setAnotherPoint(anotherPoint);
+    }
+
     @Override
     public void setAnotherPoint(Point point) {
         radius =  Util.perpendicularDistance(getTheCenter(), point);

@@ -8,8 +8,15 @@ public abstract class RectangleShape extends Shape2D {
     private int width;
     private int height;
 
-    public RectangleShape(Color borderColor, Point theCenter, Color fillColor) {
+    public RectangleShape(Color borderColor, Point theCenter, Color fillColor, int width, int height) {
         super(borderColor, theCenter, fillColor);
+        this.width = width;
+        this.height = height;
+    }
+
+    public RectangleShape(Color borderColor, Point theCenter, Color fillColor, Point antherPoint) {
+        super(borderColor, theCenter, fillColor);
+        setAnotherPoint(antherPoint);
     }
 
     @Override

@@ -11,6 +11,12 @@ public class RegularPolygon extends Shape2D {
         this.numberOfPoints = numberOfPoints;
     }
 
+    public RegularPolygon(Color borderColor, Point theCenter, Color fillColor, Point anotherPoint, int numberOfPoints) {
+        super(borderColor, theCenter, fillColor);
+        this.numberOfPoints = numberOfPoints;
+        setAnotherPoint(anotherPoint);
+    }
+
     @Override
     public void setAnotherPoint(Point point) {
         squareFrameSize = 2 * Util.perpendicularDistance(getTheCenter(), point);
