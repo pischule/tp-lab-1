@@ -15,9 +15,16 @@ public class Square extends Shape2D{
 
     private int side;
 
-    public Square(Color borderColor, Point theCenter, Color fillColor) {
+    public Square(Color borderColor, Point theCenter, Color fillColor, int side) {
         super(borderColor, theCenter, fillColor);
+        this.side = side;
     }
+
+    public Square(Color borderColor, Point theCenter, Color fillColor, Point anotherPoint) {
+        super(borderColor, theCenter, fillColor);
+        setAnotherPoint(anotherPoint);
+    }
+
 
     @Override
     public void setAnotherPoint(Point point) {

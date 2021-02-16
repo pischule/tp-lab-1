@@ -1,7 +1,9 @@
 package by.bsu.tp.gui;
 
 import by.bsu.tp.config.Config;
+import by.bsu.tp.shapes.Rectangle;
 import by.bsu.tp.shapes.Shape;
+import by.bsu.tp.shapes.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,7 +27,7 @@ public class App extends JFrame {
     private boolean isDragged = false;
     private Tool currentTool = Tool.MOVE;
 
-    private final Color frameColor;
+    private final Color borderColor;
     private final Color fillColor;
 
     public App() {
@@ -38,7 +40,8 @@ public class App extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         fillColor = Config.DEFAULT_FILL_COLOR;
-        frameColor = Config.DEFAULT_FRAME_COLOR;
+        borderColor = Config.DEFAULT_FRAME_COLOR;
+        currentTool = Tool.NONE;
 
         setVisible(true);
     }
@@ -49,7 +52,6 @@ public class App extends JFrame {
 
     private void addActionListeners() {
         rhombButton.addActionListener(e -> currentTool = Tool.RHOMB);
-        parallelogramButton.addActionListener(e -> currentTool = Tool.PARALLELOGRAM);
         polygonButton.addActionListener(e -> currentTool = Tool.POLYGON);
         lineButton.addActionListener(e -> currentTool = Tool.LINE);
         rayButton.addActionListener(e -> currentTool = Tool.RAY);
@@ -66,15 +68,14 @@ public class App extends JFrame {
 
             @Override
             public void mousePressed(MouseEvent e) {
-                if (SwingUtilities.isLeftMouseButton(e)) {
-                    repaint();
-                }
+                whenMousePressed(e.getPoint());
+                repaint();
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                if (currentTool == Tool.MOVE)
-                    isDragged = false;
+                whenMouseReleased(e.getPoint());
+                repaint();
             }
 
         });
@@ -82,13 +83,67 @@ public class App extends JFrame {
         drawPanel.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseDragged(MouseEvent e) {
-                if (SwingUtilities.isLeftMouseButton(e) && shapes.size() > 0) {
-                    Shape currentShape = shapes.get(shapes.size() - 1);
-                    repaint();
-                }
+                whenMouseDragged(e.getPoint());
+                repaint();
             }
         });
 
+    }
+
+    private void whenMousePressed(Point p) {
+        switch (currentTool) {
+            case MOVE:
+                shapes.stream()
+                        .filter(x -> x.containsPoint(p))
+                        .findFirst()
+                        .ifPresent(x -> {
+                            shapes.remove(x);
+                            shapes.add(x);
+                        });
+                break;
+            case RECTANGLE:
+                shapes.add(new Rectangle(borderColor, p, fillColor, p));
+                break;
+            case ELLIPSE:
+                shapes.add(new Ellipse(borderColor, p, fillColor, p));
+                break;
+            case SQUARE:
+                shapes.add(new Square(borderColor, p, fillColor, p));
+                break;
+            case CIRCLE:
+                shapes.add(new Circle(borderColor, p, fillColor, p));
+                break;
+            case RAY:
+                shapes.add(new Ray(borderColor, p, fillColor, p));
+                break;
+            case LINE:
+                shapes.add(new Line(borderColor, p, fillColor, p));
+                break;
+//            case POLYGON:
+//                shapes.add(new Polygon(borderColor, p, fillColor));
+//                break;
+            case REGULAR_POLYGON:
+                shapes.add(new RegularPolygon(borderColor, p, fillColor, p, 5));
+                break;
+        }
+
+    }
+
+    private void whenMouseReleased(Point p) {
+        currentTool = Tool.NONE;
+    }
+
+    private void whenMouseDragged(Point p) {
+        if (shapes == null || shapes.size() == 0) return;
+        Shape lastShape = shapes.get(shapes.size() - 1);
+        if (Tool.MOVE.equals(currentTool)) {
+            lastShape.move(p);
+        } else if (Tool.NONE.equals(currentTool)) {
+
+        } else {
+            lastShape.setAnotherPoint(p);
+        }
+        System.out.println("current tool=" + currentTool);
     }
 
     private void createUIComponents() {

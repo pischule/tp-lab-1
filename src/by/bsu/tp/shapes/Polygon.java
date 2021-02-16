@@ -11,6 +11,11 @@ public class Polygon extends Shape2D{
         this.points = points;
     }
 
+    public Polygon(Color borderColor, Point theCenter, Color fillColor) {
+        super(borderColor, theCenter, fillColor);
+        this.points = new ArrayList<>();
+    }
+
     @Override
     public void setAnotherPoint(Point point) {
         points.add(point);
