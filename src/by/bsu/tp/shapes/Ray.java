@@ -9,6 +9,13 @@ public class Ray extends Shape1D{
 
     @Override
     public void draw(Graphics2D g2d) {
-
+        double dist = Math.hypot(getTheCenter().x-getP().x, getTheCenter().y-getP().y);
+        if (dist == 0) return;
+        double xProj = (getP().x-getTheCenter().x)/dist;
+        double yProj = (getP().y-getTheCenter().y)/dist;
+        double newDist = 10000;
+        g2d.drawLine(getTheCenter().x, getTheCenter().y,
+                getTheCenter().x + (int) (newDist*xProj),
+                getTheCenter().y + (int) (newDist*yProj));
     }
 }

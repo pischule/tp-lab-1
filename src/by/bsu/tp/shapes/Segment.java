@@ -9,6 +9,10 @@ public class Segment extends Shape1D{
 
     @Override
     public void draw(Graphics2D g2d) {
+        int xDelta = (getP().x-getTheCenter().x);
+        int yDelta = (getP().y-getTheCenter().y);
 
+        g2d.drawLine(getTheCenter().x - xDelta, getTheCenter().y - yDelta,
+                getTheCenter().x + xDelta, getTheCenter().y + yDelta);
     }
 }

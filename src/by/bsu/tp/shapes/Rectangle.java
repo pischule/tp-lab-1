@@ -16,4 +16,9 @@ public class Rectangle extends RectangleShape {
     public void draw(Graphics2D g2d) {
         g2d.fillRect(getTheCenter().x - getWidth()/2, getTheCenter().y - getHeight()/2, getWidth(), getHeight());
     }
+
+    @Override
+    public boolean containsPoint(Point p) {
+        return false;
+    }
 }

@@ -32,7 +32,12 @@ public class Circle extends Shape2D {
 
     @Override
     public void draw(Graphics2D g2d) {
+        g2d.fillOval(getTheCenter().x - radius, getTheCenter().y - radius, radius*2, radius*2);
+    }
 
+    @Override
+    public boolean containsPoint(Point p) {
+        return Util.distance(p, getTheCenter()) < radius;
     }
 
     @Override

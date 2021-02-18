@@ -12,8 +12,19 @@ public class Ellipse extends RectangleShape {
     }
 
     @Override
-    public void draw(Graphics2D g2d) {
+    public boolean containsPoint(Point p) {
+        if (getWidth() == 0 || getHeight() == 0) {
+            return false;
+        } else {
+            return Math.pow((p.x - 1.0*getTheCenter().x)/getWidth(), 2) +
+                    Math.pow((p.y - 1.0*getTheCenter().y)/getHeight(), 2) < 1;
+        }
+    }
 
+    @Override
+    public void draw(Graphics2D g2d) {
+        g2d.fillOval(getTheCenter().x-getWidth()/2, getTheCenter().y-getHeight()/2,
+                getWidth(), getHeight());
     }
 
     @Override

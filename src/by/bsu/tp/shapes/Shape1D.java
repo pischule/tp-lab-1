@@ -15,6 +15,16 @@ public abstract class Shape1D extends Shape2D{
     }
 
     @Override
+    public void move(Point newCenter) {
+        int xDelta = newCenter.x - getTheCenter().x;
+        int yDelta = newCenter.y - getTheCenter().y;
+
+        super.move(newCenter);
+        p.x += xDelta;
+        p.y += yDelta;
+    }
+
+    @Override
     public void setAnotherPoint(Point point) {
         p = point;
     }

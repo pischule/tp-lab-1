@@ -28,6 +28,12 @@
                   <text value="Rect"/>
                 </properties>
               </component>
+              <component id="c5c3e" class="javax.swing.JButton" binding="circleButton">
+                <constraints/>
+                <properties>
+                  <text value="Circle"/>
+                </properties>
+              </component>
               <component id="597aa" class="javax.swing.JToggleButton" binding="rayButton">
                 <constraints/>
                 <properties>

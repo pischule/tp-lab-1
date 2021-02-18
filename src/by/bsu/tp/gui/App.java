@@ -22,10 +22,11 @@ public class App extends JFrame {
     private JToggleButton moveShapesButton;
     private JPanel rootPanel;
     private JPanel drawPanel;
+    private JButton circleButton;
     private final RegularPolygonDialog sideNumDialog;
     private final ArrayList<Shape> shapes = new ArrayList<>();
     private boolean isDragged = false;
-    private Tool currentTool = Tool.MOVE;
+    private Tool currentTool;
 
     private final Color borderColor;
     private final Color fillColor;
@@ -56,6 +57,7 @@ public class App extends JFrame {
         lineButton.addActionListener(e -> currentTool = Tool.LINE);
         rayButton.addActionListener(e -> currentTool = Tool.RAY);
         segmentButton.addActionListener(e -> currentTool = Tool.SEGMENT);
+        circleButton.addActionListener(e -> currentTool = Tool.CIRCLE);
         regularPolygonButton.addActionListener(e -> {
             currentTool = Tool.REGULAR_POLYGON;
             sideNumDialog.showDialog();
@@ -75,6 +77,7 @@ public class App extends JFrame {
             @Override
             public void mouseReleased(MouseEvent e) {
                 whenMouseReleased(e.getPoint());
+                isDragged = false;
                 repaint();
             }
 
@@ -92,51 +95,35 @@ public class App extends JFrame {
 
     private void whenMousePressed(Point p) {
         switch (currentTool) {
-            case MOVE:
-                shapes.stream()
-                        .filter(x -> x.containsPoint(p))
-                        .findFirst()
-                        .ifPresent(x -> {
-                            shapes.remove(x);
-                            shapes.add(x);
-                        });
-                break;
-            case RECTANGLE:
-                shapes.add(new Rectangle(borderColor, p, fillColor, p));
-                break;
-            case ELLIPSE:
-                shapes.add(new Ellipse(borderColor, p, fillColor, p));
-                break;
-            case SQUARE:
-                shapes.add(new Square(borderColor, p, fillColor, p));
-                break;
-            case CIRCLE:
-                shapes.add(new Circle(borderColor, p, fillColor, p));
-                break;
-            case RAY:
-                shapes.add(new Ray(borderColor, p, fillColor, p));
-                break;
-            case LINE:
-                shapes.add(new Line(borderColor, p, fillColor, p));
-                break;
-//            case POLYGON:
-//                shapes.add(new Polygon(borderColor, p, fillColor));
-//                break;
-            case REGULAR_POLYGON:
-                shapes.add(new RegularPolygon(borderColor, p, fillColor, p, 5));
-                break;
+            case MOVE -> shapes.stream()
+                    .filter(x -> x.containsPoint(p))
+                    .findFirst()
+                    .ifPresent(x -> {
+                        shapes.remove(x);
+                        shapes.add(x);
+                        isDragged = true;
+                    });
+            case RECTANGLE -> shapes.add(new Rectangle(borderColor, p, fillColor, p));
+            case ELLIPSE -> shapes.add(new Ellipse(borderColor, p, fillColor, p));
+            case SQUARE -> shapes.add(new Square(borderColor, p, fillColor, p));
+            case CIRCLE -> shapes.add(new Circle(borderColor, p, fillColor, p));
+            case RAY -> shapes.add(new Ray(borderColor, p, fillColor, p));
+            case LINE -> shapes.add(new Line(borderColor, p, fillColor, p));
+            case RHOMB -> shapes.add(new Rhomb(borderColor, p, fillColor, p));
+            case REGULAR_POLYGON -> shapes.add(new RegularPolygon(borderColor, p, fillColor, p, 5));
+            case SEGMENT -> shapes.add(new Segment(borderColor, p, fillColor, p));
         }
 
     }
 
     private void whenMouseReleased(Point p) {
-        currentTool = Tool.NONE;
+        currentTool = Tool.MOVE;
     }
 
     private void whenMouseDragged(Point p) {
         if (shapes == null || shapes.size() == 0) return;
         Shape lastShape = shapes.get(shapes.size() - 1);
-        if (Tool.MOVE.equals(currentTool)) {
+        if (Tool.MOVE.equals(currentTool) && isDragged) {
             lastShape.move(p);
         } else if (Tool.NONE.equals(currentTool)) {
 
@@ -181,6 +168,9 @@ public class App extends JFrame {
         rectangleButton = new JToggleButton();
         rectangleButton.setText("Rect");
         panel1.add(rectangleButton);
+        circleButton = new JButton();
+        circleButton.setText("Circle");
+        panel1.add(circleButton);
         rayButton = new JToggleButton();
         rayButton.setText("Ray");
         panel1.add(rayButton);

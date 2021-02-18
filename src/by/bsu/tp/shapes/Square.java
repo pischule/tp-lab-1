@@ -33,6 +33,6 @@ public class Square extends Shape2D{
 
     @Override
     public void draw(Graphics2D g2d) {
-
+        g2d.fillRect(getTheCenter().x-side/2, getTheCenter().y-side/2, side, side);
     }
 }
