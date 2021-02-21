@@ -14,7 +14,9 @@ public abstract class Shape2D extends Shape {
         return fillColor;
     }
 
+
     public void setFillColor(Color fillColor) {
         this.fillColor = fillColor;
     }
+
 }

@@ -3,7 +3,7 @@ package by.bsu.tp.shapes;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Polygon extends Shape2D{
+public class Polygon extends Shape2D {
     private ArrayList<Point> points;
 
     public Polygon(Color borderColor, Point theCenter, Color fillColor, ArrayList<Point> points) {

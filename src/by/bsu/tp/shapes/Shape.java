@@ -5,6 +5,13 @@ import java.awt.*;
 public abstract class Shape {
     private Color borderColor;
     private Point theCenter;
+    private Stroke stroke;
+
+    public Shape(Color borderColor, Point theCenter) {
+        this.borderColor = borderColor;
+        this.theCenter = new Point(theCenter);
+        this.stroke = new BasicStroke(3);
+    }
 
     public Stroke getStroke() {
         return stroke;
@@ -12,14 +19,6 @@ public abstract class Shape {
 
     public void setStroke(Stroke stroke) {
         this.stroke = stroke;
-    }
-
-    private Stroke stroke;
-
-    public Shape(Color borderColor, Point theCenter) {
-        this.borderColor = borderColor;
-        this.theCenter = new Point(theCenter);
-        stroke = new BasicStroke(5);
     }
 
     public abstract void setAnotherPoint(Point point);

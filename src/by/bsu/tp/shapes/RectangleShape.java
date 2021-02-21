@@ -41,4 +41,10 @@ public abstract class RectangleShape extends Shape2D {
     public void setHeight(int height) {
         this.height = height;
     }
+
+    @Override
+    public boolean containsPoint(Point p) {
+        return Math.abs(p.x - getTheCenter().x) < width / 2 &&
+                Math.abs(p.y - getTheCenter().y) < height / 2;
+    }
 }

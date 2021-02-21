@@ -14,11 +14,10 @@ public class Rectangle extends RectangleShape {
 
     @Override
     public void draw(Graphics2D g2d) {
-        g2d.fillRect(getTheCenter().x - getWidth()/2, getTheCenter().y - getHeight()/2, getWidth(), getHeight());
-    }
-
-    @Override
-    public boolean containsPoint(Point p) {
-        return false;
+        g2d.setStroke(getStroke());
+        g2d.setColor(getFillColor());
+        g2d.fillRect(getTheCenter().x - getWidth() / 2, getTheCenter().y - getHeight() / 2, getWidth(), getHeight());
+        g2d.setColor(getBorderColor());
+        g2d.drawRect(getTheCenter().x - getWidth() / 2, getTheCenter().y - getHeight() / 2, getWidth(), getHeight());
     }
 }

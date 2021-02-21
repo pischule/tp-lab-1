@@ -2,16 +2,20 @@ package by.bsu.tp.shapes;
 
 import java.awt.*;
 
-public abstract class Shape1D extends Shape2D{
+public abstract class Shape1D extends Shape {
     private Point p;
 
     public Shape1D(Color borderColor, Point theCenter, Color fillColor, Point p) {
-        super(borderColor, theCenter, fillColor);
+        super(borderColor, theCenter);
         this.p = p;
     }
 
     public Point getP() {
         return p;
+    }
+
+    public void setP(Point p) {
+        this.p = p;
     }
 
     @Override
@@ -27,9 +31,5 @@ public abstract class Shape1D extends Shape2D{
     @Override
     public void setAnotherPoint(Point point) {
         p = point;
-    }
-
-    public void setP(Point p) {
-        this.p = p;
     }
 }

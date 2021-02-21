@@ -7,8 +7,12 @@ public class Util {
         return Math.min(xDistance(p1, p2), yDistance(p1, p2));
     }
 
+    public static int maxPerpendDistance(Point p1, Point p2) {
+        return Math.max(xDistance(p1, p2), yDistance(p1, p2));
+    }
+
     public static double distance(Point p1, Point p2) {
-        return Math.hypot(p1.getX()-p2.getX(), p2.getY()-p2.getY());
+        return Math.hypot(p1.getX() - p2.getX(), p2.getY() - p2.getY());
     }
 
     public static int xDistance(Point p1, Point p2) {

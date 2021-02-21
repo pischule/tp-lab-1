@@ -5,6 +5,9 @@ import by.bsu.tp.Util;
 import java.awt.*;
 
 public class RegularPolygon extends Shape2D {
+    private int squareFrameSize;
+    private int numberOfPoints;
+
     public RegularPolygon(Color borderColor, Point theCenter, Color fillColor, int squareFrameSize, int numberOfPoints) {
         super(borderColor, theCenter, fillColor);
         this.squareFrameSize = squareFrameSize;
@@ -22,8 +25,6 @@ public class RegularPolygon extends Shape2D {
         squareFrameSize = 2 * Util.perpendicularDistance(getTheCenter(), point);
     }
 
-    private int squareFrameSize;
-
     public int getNumberOfPoints() {
         return numberOfPoints;
     }
@@ -31,8 +32,6 @@ public class RegularPolygon extends Shape2D {
     public void setNumberOfPoints(int numberOfPoints) {
         this.numberOfPoints = numberOfPoints;
     }
-
-    private int numberOfPoints;
 
     @Override
     public void draw(Graphics2D g2d) {
