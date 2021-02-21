@@ -16,11 +16,11 @@ public abstract class RectangleShape extends Shape2D {
 
     public RectangleShape(Color borderColor, Point theCenter, Color fillColor, Point antherPoint) {
         super(borderColor, theCenter, fillColor);
-        setAnotherPoint(antherPoint);
+        addPoint(antherPoint);
     }
 
     @Override
-    public void setAnotherPoint(Point point) {
+    public void addPoint(Point point) {
         width = 2 * Util.xDistance(getTheCenter(), point);
         height = 2 * Util.yDistance(getTheCenter(), point);
     }

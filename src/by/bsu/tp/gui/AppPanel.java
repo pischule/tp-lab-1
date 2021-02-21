@@ -12,6 +12,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Optional;
 
 public class AppPanel extends JPanel {
 
@@ -23,6 +24,8 @@ public class AppPanel extends JPanel {
 
     private Color borderColor;
     private Color fillColor;
+
+    private int numberOfPoints;
 
     public AppPanel() {
         super();
@@ -80,6 +83,7 @@ public class AppPanel extends JPanel {
             case RAY -> shapes.add(new Ray(borderColor, p, fillColor, p));
             case SQUARE -> shapes.add(new Square(borderColor, p, fillColor, p));
             case RHOMBUS -> shapes.add(new Rhombus(borderColor, p, fillColor, p));
+            case REGULAR_POLYGON -> shapes.add(new RegularPolygon(borderColor, p, fillColor, p, numberOfPoints));
         }
         repaint();
     }
@@ -95,28 +99,44 @@ public class AppPanel extends JPanel {
         if (Tool.MOVE.equals(currentTool) && isDragged) {
             lastShape.move(p);
         } else if (!Tool.MOVE.equals(currentTool)) {
-            lastShape.setAnotherPoint(p);
+            lastShape.addPoint(p);
         }
         repaint();
     }
 
     private void createUIComponents() {
         setSize(Config.WINDOW_SIZE);
-
         setLayout(new BorderLayout());
         // create frame
+
         buttonsPanel = new JPanel();
         buttonsPanel.setLayout(new GridLayout(0, 1));
 
-        borderColor = Color.RED;
-        fillColor = Color.BLACK;
+        fillColor = Color.GRAY;
+        borderColor = Color.BLACK;
 
         Arrays.stream(Tool.values())
+                .filter(x -> !x.equals(Tool.REGULAR_POLYGON))
                 .map(x -> {
                     JButton button = new JButton(x.getName());
                     button.addActionListener((e) -> currentTool = x);
                     return button;
                 }).forEach(x -> buttonsPanel.add(x));
+
+        JButton polygonButton = new JButton();
+        polygonButton.setText(Tool.REGULAR_POLYGON.getName());
+        polygonButton.addActionListener(e -> {
+            currentTool = Tool.REGULAR_POLYGON;
+            String userInput = JOptionPane.showInputDialog("Input number of vertices: ");
+            int n = Integer.parseInt(userInput);
+            numberOfPoints = Optional.of(Integer.parseInt(userInput))
+                    .filter(x -> x > 1)
+                    .orElseGet(() -> {
+                        JOptionPane.showMessageDialog(this, "Bad argument");
+                        return numberOfPoints;
+                    });
+        });
+        buttonsPanel.add(polygonButton);
 
         JButton fillColorButton = new JButton();
         fillColorButton.setText("Fill Color");
@@ -128,16 +148,7 @@ public class AppPanel extends JPanel {
         borderColorButton.addActionListener((e) -> borderColor = JColorChooser.showDialog(null, "Choose border color", borderColor));
         buttonsPanel.add(borderColorButton);
 
-        drawPanel = new JPanel() {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                Graphics2D g2d = (Graphics2D) g;
-                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                for (Shape s : shapes)
-                    s.draw(g2d);
-            }
-        };
+        drawPanel = new DrawingPanel(shapes);
 
         add(buttonsPanel, BorderLayout.WEST);
         add(drawPanel, BorderLayout.CENTER);

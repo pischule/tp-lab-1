@@ -21,7 +21,7 @@ public abstract class Shape {
         this.stroke = stroke;
     }
 
-    public abstract void setAnotherPoint(Point point);
+    public abstract void addPoint(Point point);
 
     public boolean containsPoint(Point p) {
         return false;

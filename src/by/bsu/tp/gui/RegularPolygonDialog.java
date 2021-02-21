@@ -5,8 +5,8 @@ import java.awt.*;
 
 public class RegularPolygonDialog extends JDialog {
 
-    private int sideNum = 5;
     private final JTextField sideNumField;
+    private int sideNum = 5;
 
     RegularPolygonDialog(JFrame parent) {
         super(parent, "Set number of sides");
