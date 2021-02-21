@@ -3,7 +3,7 @@ package by.bsu.tp.shapes;
 import java.awt.Polygon;
 import java.awt.*;
 
-public class Rhombus extends RectangleShape {
+public class Rhombus extends WidthHeightShape {
 
     public Rhombus(Color borderColor, Point theCenter, Color fillColor, int width, int height) {
         super(borderColor, theCenter, fillColor, width, height);
@@ -28,8 +28,4 @@ public class Rhombus extends RectangleShape {
         g2d.drawPolygon(rhombusPolygon);
     }
 
-    @Override
-    public Point location() {
-        return null;
-    }
 }

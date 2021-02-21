@@ -2,7 +2,7 @@ package by.bsu.tp.shapes;
 
 import java.awt.*;
 
-public class Ellipse extends RectangleShape {
+public class Ellipse extends WidthHeightShape {
     public Ellipse(Color borderColor, Point theCenter, Color fillColor, int width, int height) {
         super(borderColor, theCenter, fillColor, width, height);
     }
@@ -32,8 +32,4 @@ public class Ellipse extends RectangleShape {
                 getWidth(), getHeight());
     }
 
-    @Override
-    public Point location() {
-        return null;
-    }
 }

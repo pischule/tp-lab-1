@@ -43,9 +43,4 @@ public class Circle extends Shape2D {
     public boolean containsPoint(Point p) {
         return Util.distance(p, getTheCenter()) < radius;
     }
-
-    @Override
-    public Point location() {
-        return null;
-    }
 }

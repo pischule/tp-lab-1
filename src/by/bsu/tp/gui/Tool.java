@@ -6,13 +6,12 @@ public enum Tool {
     RECTANGLE("Rectangle", Rectangle.class),
     CIRCLE("Circle", Circle.class),
     ELLIPSE("Ellipse", Ellipse.class),
-    LINE("Line", Line.class),
-    RAY("Ray", Ray.class),
-    SQUARE("Square", Square.class),
     TRIANGLE("Triangle", Triangle.class),
-    SEGMENT("Segment", Segment.class),
     RHOMBUS("Rhombus", Rhombus.class),
     REGULAR_POLYGON("Regular polygon", RegularPolygon.class),
+    SEGMENT("Segment", Segment.class),
+    LINE("Line", Line.class),
+    RAY("Ray", Ray.class),
     MOVE("Move", null);
 
 

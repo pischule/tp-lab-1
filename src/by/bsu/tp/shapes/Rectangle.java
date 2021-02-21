@@ -2,7 +2,7 @@ package by.bsu.tp.shapes;
 
 import java.awt.*;
 
-public class Rectangle extends RectangleShape {
+public class Rectangle extends WidthHeightShape {
 
     public Rectangle(Color borderColor, Point theCenter, Color fillColor, int width, int height) {
         super(borderColor, theCenter, fillColor, width, height);

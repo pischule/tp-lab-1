@@ -40,7 +40,7 @@ public class RegularPolygon extends Shape2D {
         double radius = squareFrameSize / 2.0;
         double angle;
         for (int i = 0; i < numberOfPoints; ++i) {
-            angle = 2.0 * Math.PI / numberOfPoints * (i);
+            angle = 2.0 * Math.PI / numberOfPoints * (i) + Math.PI / numberOfPoints;
             points.add(new Point((int) (getTheCenter().x + radius * Math.cos(angle)),
                     (int) (getTheCenter().y + radius * Math.sin(angle))));
         }
@@ -58,8 +58,4 @@ public class RegularPolygon extends Shape2D {
         g2d.drawPolygon(awtPolygon);
     }
 
-    @Override
-    public Point location() {
-        return null;
-    }
 }

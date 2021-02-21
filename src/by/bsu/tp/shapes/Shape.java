@@ -41,7 +41,7 @@ public abstract class Shape {
         this.theCenter = newCenter;
     }
 
-    public Point location() {
+    public Point getLocation() {
         return theCenter;
     }
 

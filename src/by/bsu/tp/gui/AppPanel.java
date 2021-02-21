@@ -81,7 +81,6 @@ public class AppPanel extends JPanel {
             case TRIANGLE -> shapes.add(new Triangle(borderColor, p, fillColor, p));
             case LINE -> shapes.add(new Line(borderColor, p, fillColor, p));
             case RAY -> shapes.add(new Ray(borderColor, p, fillColor, p));
-            case SQUARE -> shapes.add(new Square(borderColor, p, fillColor, p));
             case RHOMBUS -> shapes.add(new Rhombus(borderColor, p, fillColor, p));
             case REGULAR_POLYGON -> shapes.add(new RegularPolygon(borderColor, p, fillColor, p, numberOfPoints));
         }
