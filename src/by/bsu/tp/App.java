@@ -1,6 +1,7 @@
-package by.bsu.tp.gui;
+package by.bsu.tp;
 
 import by.bsu.tp.config.Config;
+import by.bsu.tp.gui.AppPanel;
 
 import javax.swing.*;
 
@@ -17,7 +18,7 @@ public class App {
             e.printStackTrace();
         }
 
-        JFrame f = new JFrame("Drawing App");
+        JFrame f = new JFrame(Config.APP_NAME);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setSize(Config.WINDOW_SIZE);
         f.add(new AppPanel());
