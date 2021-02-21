@@ -14,7 +14,7 @@ public class Square extends Shape2D {
 
     public Square(Color borderColor, Point theCenter, Color fillColor, Point anotherPoint) {
         super(borderColor, theCenter, fillColor);
-        setAnotherPoint(anotherPoint);
+        addPoint(anotherPoint);
     }
 
     public int getSide() {
@@ -26,7 +26,7 @@ public class Square extends Shape2D {
     }
 
     @Override
-    public void setAnotherPoint(Point point) {
+    public void addPoint(Point point) {
         side = 2 * Util.maxPerpendDistance(getTheCenter(), point);
     }
 

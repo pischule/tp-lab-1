@@ -12,6 +12,7 @@ public enum Tool {
     TRIANGLE("Triangle", Triangle.class),
     SEGMENT("Segment", Segment.class),
     RHOMBUS("Rhombus", Rhombus.class),
+    REGULAR_POLYGON("Regular polygon", RegularPolygon.class),
     MOVE("Move", null);
 
 

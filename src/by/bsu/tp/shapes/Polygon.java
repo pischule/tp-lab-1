@@ -17,7 +17,7 @@ public class Polygon extends Shape2D {
     }
 
     @Override
-    public void setAnotherPoint(Point point) {
+    public void addPoint(Point point) {
         points.add(point);
     }
 
