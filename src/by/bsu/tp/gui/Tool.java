@@ -13,8 +13,7 @@ public enum Tool {
     SEGMENT("Segment", Segment.class),
     LINE("Line", Line.class),
     RAY("Ray", Ray.class),
-    MOVE("Move", null),
-    CLEAR("Clear", null);
+    MOVE("Move", null);
 
 
     private final String name;

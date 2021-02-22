@@ -55,6 +55,7 @@ public class RegularPolygon extends Shape2D {
         g2d.setColor(getFillColor());
         g2d.fillPolygon(awtPolygon);
         g2d.setColor(getBorderColor());
+        g2d.setStroke(getStroke());
         g2d.drawPolygon(awtPolygon);
     }
 
