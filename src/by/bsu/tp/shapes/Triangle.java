@@ -35,7 +35,7 @@ public class Triangle extends Shape2D {
     }
 
     @Override
-    public void addPoint(Point point) {
+    public void updateLastPoint(Point point) {
         width = 2 * Util.xDistance(getTheCenter(), point);
         height = 2 * Util.yDistance(getTheCenter(), point);
     }

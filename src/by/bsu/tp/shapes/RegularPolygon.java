@@ -19,11 +19,11 @@ public class RegularPolygon extends Shape2D {
     public RegularPolygon(Color borderColor, Point theCenter, Color fillColor, Point anotherPoint, int numberOfPoints) {
         super(borderColor, theCenter, fillColor);
         this.numberOfPoints = numberOfPoints;
-        addPoint(anotherPoint);
+        updateLastPoint(anotherPoint);
     }
 
     @Override
-    public void addPoint(Point point) {
+    public void updateLastPoint(Point point) {
         squareFrameSize = 2 * Util.perpendicularDistance(getTheCenter(), point);
     }
 
