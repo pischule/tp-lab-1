@@ -29,7 +29,7 @@ public abstract class Shape1D extends Shape {
     }
 
     @Override
-    public void addPoint(Point point) {
+    public void updateLastPoint(Point point) {
         p = point;
     }
 }

@@ -9,6 +9,7 @@ public enum Tool {
     TRIANGLE("Triangle", Triangle.class),
     RHOMBUS("Rhombus", Rhombus.class),
     REGULAR_POLYGON("Regular polygon", RegularPolygon.class),
+    POLYGON("Polygon", Polygon.class),
     SEGMENT("Segment", Segment.class),
     LINE("Line", Line.class),
     RAY("Ray", Ray.class),

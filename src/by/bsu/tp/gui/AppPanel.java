@@ -1,6 +1,7 @@
 package by.bsu.tp.gui;
 
 import by.bsu.tp.config.Config;
+import by.bsu.tp.shapes.Polygon;
 import by.bsu.tp.shapes.Rectangle;
 import by.bsu.tp.shapes.Shape;
 import by.bsu.tp.shapes.*;
@@ -25,7 +26,11 @@ public class AppPanel extends JPanel {
     private Color borderColor;
     private Color fillColor;
 
+    private boolean drawingPolygon;
+
     private int numberOfPoints;
+
+    private static int LEFT_MOUSE_BUTTON = 1;
 
     public AppPanel() {
         super();
@@ -36,6 +41,7 @@ public class AppPanel extends JPanel {
         fillColor = Config.DEFAULT_FILL_COLOR;
         borderColor = Config.DEFAULT_FRAME_COLOR;
         currentTool = Tool.MOVE;
+        drawingPolygon = false;
     }
 
     private void addActionListeners() {
@@ -44,26 +50,41 @@ public class AppPanel extends JPanel {
 
             @Override
             public void mousePressed(MouseEvent e) {
-                whenMousePressed(e.getPoint());
+                whenMousePressed(e.getPoint(), e.getButton());
             }
+
 
             @Override
             public void mouseReleased(MouseEvent e) {
                 whenMouseReleased(e.getPoint());
             }
-
         });
 
         drawPanel.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseDragged(MouseEvent e) {
+                super.mouseDragged(e);
                 whenMouseDragged(e.getPoint());
             }
-        });
 
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                super.mouseMoved(e);
+                whenMouseMoved(e.getPoint());
+            }
+
+        });
     }
 
-    private void whenMousePressed(Point p) {
+    private void whenMouseMoved(Point point) {
+        if (Tool.POLYGON.equals(currentTool) && drawingPolygon) {
+            Polygon polygon = (Polygon) shapes.get(shapes.size()-1);
+            polygon.updateLastPoint(point);
+            drawPanel.updateUI();
+        }
+    }
+
+    private void whenMousePressed(Point p, int mouseButton) {
 
         switch (currentTool) {
             case MOVE -> shapes.stream()
@@ -74,6 +95,19 @@ public class AppPanel extends JPanel {
                         shapes.add(x);
                         isDragged = true;
                     });
+            case POLYGON -> {
+                if (!drawingPolygon) {
+                    shapes.add(new Polygon(borderColor, p, fillColor, p));
+                    drawingPolygon = true;
+                } else {
+                    Polygon polygon = (Polygon) shapes.get(shapes.size()-1);
+                    polygon.addPoint(p);
+                    if (mouseButton != LEFT_MOUSE_BUTTON) {
+                        drawingPolygon = false;
+                        currentTool = Tool.MOVE;
+                    }
+                }
+            }
             case RECTANGLE -> shapes.add(new Rectangle(borderColor, p, fillColor, p));
             case ELLIPSE -> shapes.add(new Ellipse(borderColor, p, fillColor, p));
             case CIRCLE -> shapes.add(new Circle(borderColor, p, fillColor, p));
@@ -88,8 +122,10 @@ public class AppPanel extends JPanel {
     }
 
     private void whenMouseReleased(Point p) {
-        isDragged = false;
-        currentTool = Tool.MOVE;
+        if (!drawingPolygon) {
+            isDragged = false;
+            currentTool = Tool.MOVE;
+        }
     }
 
     private void whenMouseDragged(Point p) {
@@ -98,7 +134,7 @@ public class AppPanel extends JPanel {
         if (Tool.MOVE.equals(currentTool) && isDragged) {
             lastShape.move(p);
         } else if (!Tool.MOVE.equals(currentTool)) {
-            lastShape.addPoint(p);
+            lastShape.updateLastPoint(p);
         }
         repaint();
     }

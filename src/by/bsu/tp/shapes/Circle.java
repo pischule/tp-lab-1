@@ -14,7 +14,7 @@ public class Circle extends Shape2D {
 
     public Circle(Color borderColor, Point theCenter, Color fillColor, Point anotherPoint) {
         super(borderColor, theCenter, fillColor);
-        addPoint(anotherPoint);
+        updateLastPoint(anotherPoint);
     }
 
     public int getRadius() {
@@ -26,8 +26,8 @@ public class Circle extends Shape2D {
     }
 
     @Override
-    public void addPoint(Point point) {
-        radius = Util.perpendicularDistance(getTheCenter(), point);
+    public void updateLastPoint(Point point) {
+        radius = (int) Util.distance(getTheCenter(), point);
     }
 
     @Override

@@ -16,11 +16,11 @@ public abstract class WidthHeightShape extends Shape2D {
 
     public WidthHeightShape(Color borderColor, Point theCenter, Color fillColor, Point antherPoint) {
         super(borderColor, theCenter, fillColor);
-        addPoint(antherPoint);
+        updateLastPoint(antherPoint);
     }
 
     @Override
-    public void addPoint(Point point) {
+    public void updateLastPoint(Point point) {
         width = 2 * Util.xDistance(getTheCenter(), point);
         height = 2 * Util.yDistance(getTheCenter(), point);
     }
