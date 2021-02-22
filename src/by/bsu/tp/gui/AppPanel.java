@@ -27,6 +27,8 @@ public class AppPanel extends JPanel {
 
     private int numberOfPoints;
 
+    private Point polygonFirstPoint;
+
     public AppPanel() {
         super();
         createUIComponents();
@@ -146,6 +148,14 @@ public class AppPanel extends JPanel {
         borderColorButton.setText("Border Color");
         borderColorButton.addActionListener((e) -> borderColor = JColorChooser.showDialog(null, "Choose border color", borderColor));
         buttonsPanel.add(borderColorButton);
+
+        JButton clearButton = new JButton();
+        clearButton.setText("Clear");
+        clearButton.addActionListener(e -> {
+            shapes.clear();
+            drawPanel.updateUI();
+        });
+        buttonsPanel.add(clearButton);
 
         drawPanel = new DrawingPanel(shapes);
 
