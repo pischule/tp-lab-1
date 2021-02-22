@@ -162,14 +162,18 @@ public class AppPanel extends JPanel {
         polygonButton.setText(Tool.REGULAR_POLYGON.getName());
         polygonButton.addActionListener(e -> {
             currentTool = Tool.REGULAR_POLYGON;
-            String userInput = JOptionPane.showInputDialog("Input number of vertices: ");
-            int n = Integer.parseInt(userInput);
-            numberOfPoints = Optional.of(Integer.parseInt(userInput))
-                    .filter(x -> x > 1)
-                    .orElseGet(() -> {
-                        JOptionPane.showMessageDialog(this, "Bad argument");
-                        return numberOfPoints;
-                    });
+            try {
+                String userInput = JOptionPane.showInputDialog("Input number of vertices: ");
+                int n = Integer.parseInt(userInput);
+                numberOfPoints = Optional.of(Integer.parseInt(userInput))
+                        .filter(x -> x > 1)
+                        .orElseGet(() -> {
+                            JOptionPane.showMessageDialog(this, "Bad argument");
+                            return numberOfPoints;
+                        });
+            } catch (Exception exception) {
+                JOptionPane.showMessageDialog(this, "Bad argument");
+            }
         });
         buttonsPanel.add(polygonButton);
 
