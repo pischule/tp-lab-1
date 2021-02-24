@@ -4,9 +4,11 @@ import by.bsu.tp.shapes.*;
 
 public enum Tool {
     RECTANGLE("Rectangle", Rectangle.class),
+    SQUARE("Square", Square.class),
     CIRCLE("Circle", Circle.class),
     ELLIPSE("Ellipse", Ellipse.class),
     TRIANGLE("Triangle", Triangle.class),
+    RIGHT_TRIANGLE("Right trinagle", RightTriangle.class),
     RHOMBUS("Rhombus", Rhombus.class),
     REGULAR_POLYGON("Regular polygon", RegularPolygon.class),
     POLYGON("Polygon", Polygon.class),

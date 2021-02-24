@@ -2,35 +2,31 @@ package by.bsu.tp.gui;
 
 import by.bsu.tp.config.Config;
 import by.bsu.tp.shapes.Polygon;
-import by.bsu.tp.shapes.Rectangle;
+import by.bsu.tp.shapes.RegularPolygon;
 import by.bsu.tp.shapes.Shape;
-import by.bsu.tp.shapes.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
 
 public class AppPanel extends JPanel {
 
+    private static final int LEFT_MOUSE_BUTTON = 1;
     private final ArrayList<Shape> shapes = new ArrayList<>();
     private JPanel drawPanel;
     private JPanel buttonsPanel;
     private boolean isDragged = false;
     private Tool currentTool;
-
     private Color borderColor;
     private Color fillColor;
-
     private boolean drawingPolygon;
-
     private int numberOfPoints;
-
-    private static int LEFT_MOUSE_BUTTON = 1;
 
     public AppPanel() {
         super();
@@ -78,7 +74,7 @@ public class AppPanel extends JPanel {
 
     private void whenMouseMoved(Point point) {
         if (Tool.POLYGON.equals(currentTool) && drawingPolygon) {
-            Polygon polygon = (Polygon) shapes.get(shapes.size()-1);
+            Polygon polygon = (Polygon) shapes.get(shapes.size() - 1);
             polygon.updateLastPoint(point);
             drawPanel.updateUI();
         }
@@ -89,7 +85,7 @@ public class AppPanel extends JPanel {
         switch (currentTool) {
             case MOVE -> shapes.stream()
                     .filter(x -> x.containsPoint(p))
-                    .findFirst()
+                    .reduce((a, b) -> b)
                     .ifPresent(x -> {
                         shapes.remove(x);
                         shapes.add(x);
@@ -100,7 +96,7 @@ public class AppPanel extends JPanel {
                     shapes.add(new Polygon(borderColor, p, fillColor, p));
                     drawingPolygon = true;
                 } else {
-                    Polygon polygon = (Polygon) shapes.get(shapes.size()-1);
+                    Polygon polygon = (Polygon) shapes.get(shapes.size() - 1);
                     polygon.addPoint(p);
                     if (mouseButton != LEFT_MOUSE_BUTTON) {
                         drawingPolygon = false;
@@ -108,15 +104,16 @@ public class AppPanel extends JPanel {
                     }
                 }
             }
-            case RECTANGLE -> shapes.add(new Rectangle(borderColor, p, fillColor, p));
-            case ELLIPSE -> shapes.add(new Ellipse(borderColor, p, fillColor, p));
-            case CIRCLE -> shapes.add(new Circle(borderColor, p, fillColor, p));
-            case SEGMENT -> shapes.add(new Segment(borderColor, p, fillColor, p));
-            case TRIANGLE -> shapes.add(new Triangle(borderColor, p, fillColor, p));
-            case LINE -> shapes.add(new Line(borderColor, p, fillColor, p));
-            case RAY -> shapes.add(new Ray(borderColor, p, fillColor, p));
-            case RHOMBUS -> shapes.add(new Rhombus(borderColor, p, fillColor, p));
             case REGULAR_POLYGON -> shapes.add(new RegularPolygon(borderColor, p, fillColor, p, numberOfPoints));
+            default -> {
+                try {
+                    Shape s = currentTool.getShapeClass().getConstructor(Color.class, Point.class, Color.class, Point.class)
+                            .newInstance(borderColor, p, fillColor, p);
+                    shapes.add(s);
+                } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         repaint();
     }

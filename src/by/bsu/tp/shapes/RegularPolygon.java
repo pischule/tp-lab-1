@@ -48,15 +48,24 @@ public class RegularPolygon extends Shape2D {
     }
 
     @Override
-    public void draw(Graphics2D g2d) {
-        Polygon awtPolygon = new Polygon();
-        getPoints().forEach(x -> awtPolygon.addPoint(x.x, x.y));
+    public boolean containsPoint(Point p) {
+        return createAwtPolygon().contains(p);
+    }
 
+    @Override
+    public void draw(Graphics2D g2d) {
+        Polygon awtPolygon = createAwtPolygon();
         g2d.setColor(getFillColor());
         g2d.fillPolygon(awtPolygon);
         g2d.setColor(getBorderColor());
         g2d.setStroke(getStroke());
         g2d.drawPolygon(awtPolygon);
+    }
+
+    private Polygon createAwtPolygon() {
+        Polygon awtPolygon = new Polygon();
+        getPoints().forEach(x -> awtPolygon.addPoint(x.x, x.y));
+        return awtPolygon;
     }
 
 }

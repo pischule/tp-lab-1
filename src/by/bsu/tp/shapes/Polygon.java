@@ -37,14 +37,23 @@ public class Polygon extends Shape2D {
     }
 
     @Override
-    public void draw(Graphics2D g2d) {
-        java.awt.Polygon polygon = new java.awt.Polygon();
-        polygon.addPoint(getTheCenter().x, getTheCenter().y);
-        points.forEach(p -> polygon.addPoint(p.x, p.y));
+    public boolean containsPoint(Point p) {
+        return createAwtPolygon().contains(p);
+    }
 
+    @Override
+    public void draw(Graphics2D g2d) {
+        var polygon = createAwtPolygon();
         g2d.setColor(getFillColor());
         g2d.fillPolygon(polygon);
         g2d.setColor(getBorderColor());
         g2d.drawPolygon(polygon);
+    }
+
+    private java.awt.Polygon createAwtPolygon() {
+        java.awt.Polygon polygon = new java.awt.Polygon();
+        polygon.addPoint(getTheCenter().x, getTheCenter().y);
+        points.forEach(p -> polygon.addPoint(p.x, p.y));
+        return polygon;
     }
 }
