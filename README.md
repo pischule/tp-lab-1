@@ -1,6 +1,5 @@
 # swing drawing app
 
-![shapes](https://user-images.githubusercontent.com/41614960/108637563-4ec22a80-749c-11eb-935f-0f2d879a6900.png)
+![shapes](https://user-images.githubusercontent.com/41614960/108999452-5e678c00-76b3-11eb-9456-4b7f97062b4f.png)
 
-![image](https://user-images.githubusercontent.com/41614960/108637629-84ffaa00-749c-11eb-9b38-b75fe0dbedc3.png)
-
+![image](https://user-images.githubusercontent.com/41614960/108999314-2d875700-76b3-11eb-919f-543ec8d976a7.png)
