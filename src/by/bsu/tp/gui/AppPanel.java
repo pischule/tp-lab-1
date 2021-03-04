@@ -90,6 +90,7 @@ public class AppPanel extends JPanel {
                         shapes.remove(x);
                         shapes.add(x);
                         isDragged = true;
+                        drawingPolygon = false;
                     });
             case POLYGON -> {
                 if (!drawingPolygon) {

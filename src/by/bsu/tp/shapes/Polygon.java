@@ -42,6 +42,18 @@ public class Polygon extends Shape2D {
     }
 
     @Override
+    public void move(Point newCenter) {
+        int delta_x = newCenter.x - getTheCenter().x;
+        int delta_y = newCenter.y - getTheCenter().y;
+        super.move(newCenter);
+        points.forEach((p)->{
+            p.x += delta_x;
+            p.y += delta_y;
+        });
+
+    }
+
+    @Override
     public void draw(Graphics2D g2d) {
         var polygon = createAwtPolygon();
         g2d.setColor(getFillColor());
